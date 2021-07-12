@@ -10,7 +10,6 @@ export const Form = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(createPost(postData));
