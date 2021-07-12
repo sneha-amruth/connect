@@ -3,8 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// const token = JSON.parse(localStorage?.getItem("user"))?.token;
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGU5ODAzYTcwNGViODAxNzczYWYxM2MiLCJpYXQiOjE2MjYwMDMxNjYsImV4cCI6MTYyNjA4OTU2Nn0.5pUzGVtpP0znyuSSzKl5lGVNf6I_4ExCrtFNVonGrRE"
+const token = JSON.parse(localStorage.getItem("profile"))?.token;
 
 export const api = axios.create({
     baseURL: process.env.REACT_APP_API_URL,

@@ -1,4 +1,3 @@
-// import * as api from "../api";
 import { restAPICalls } from "../utils/CallRestAPI";
 import { FETCH_ALL, CREATE, DELETE, LIKE } from "../constants/actionTypes";
 
