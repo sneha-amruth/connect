@@ -1,25 +1,43 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-    },
+  border: {
+    border: 'solid',
   },
-  paper: {
-    padding: theme.spacing(2),
+  fullHeightCard: {
+    height: '100%',
   },
-  form: {
+  card: {
     display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '100%',
+    position: 'relative',
   },
-  fileInput: {
-    width: '97%',
-    margin: '10px 0',
+  userInfo: {
+    display: 'flex',
+    flexDirection: 'row',
   },
-  buttonSubmit: {
-    marginBottom: 10,
-    justifyContent: 'flex-start',
+  usernName: {
+    margin: "0.2rem 0.3rem",
+    fontWeight: "bold",
+  },
+  grid: {
+    display: 'flex',
+  },
+  details: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '20px',
+  },
+  title: {
+    padding: '0 16px',
+  },
+  cardActions: {
+    // padding: '0 2px 0 0',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    color: "blue"
+
   },
 }));

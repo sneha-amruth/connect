@@ -1,18 +1,23 @@
-import { AUTH } from '../constants/actionTypes';
+import { AUTH, AUTH_ERROR } from '../constants/actionTypes';
 import { restAPICalls } from "../utils/CallRestAPI";
 
 const { request } = restAPICalls();
 
 export const login = (formData, router) => async(dispatch) =>  {
     try {
-      const {data, token } = await request({
+      const {success, data, token, message } = await request({
        method:  "POST",
        endpoint: `/api/user/login`,
        body: formData
    });
+   if(success){
       const authData = {...data, token}
       dispatch({ type: AUTH, payload: authData });
       router('/');
+   } else {
+    dispatch({ type: AUTH_ERROR, errors: true, errorText:  message});
+    router('/auth');
+   }
      
     } catch(err){
          console.log(err.message)

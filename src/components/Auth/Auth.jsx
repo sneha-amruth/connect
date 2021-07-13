@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { AUTH_ERROR } from '../../constants/actionTypes';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { login, signup } from '../../actions/auth';
 import Input from './Input';
 import useStyles from './styles';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
@@ -15,6 +17,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const navigate = useNavigate();
+  const authResponse = useSelector((state) => state.auth);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
@@ -35,7 +38,10 @@ const SignUp = () => {
     }
   };
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    dispatch({ type: AUTH_ERROR, errors: false, errorText: ""});
+    setForm({ ...form, [e.target.name]: e.target.value })
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -44,6 +50,7 @@ const SignUp = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Login' }</Typography>
+        <Typography component="h1" variant="h6" color="error">{ authResponse.errors ? authResponse.errorText : '' }</Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             { isSignup && (
