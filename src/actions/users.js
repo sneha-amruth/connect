@@ -4,7 +4,6 @@ import { restAPICalls } from "../utils/CallRestAPI";
 const { request } = restAPICalls();
 
 export const getAllUsers = () => async(dispatch) =>  {
-    console.log("going to get ");
     try {
       const { data } = await request({
        method:  "GET",
@@ -16,14 +15,31 @@ export const getAllUsers = () => async(dispatch) =>  {
     }
  }
 
-//  export const getUser = (userId) => async(dispatch) =>  {
-//     try {
-//       const { data } = await request({
-//        method:  "GET",
-//        endpoint: `/api/user/${userId}`,
-//    });
-//       dispatch({ type: GET_USER, payload: data })
-//     } catch(err){
-//          console.log(err.message)
-//     }
-//  }
+ export const followUser = (followUserId) => async(dispatch) =>  {
+  try {
+    const data  = await request({
+     method:  "POST",
+     endpoint: `/api/user/follow`,
+     body: {
+      following: followUserId
+     }
+ });
+    dispatch({ type: ALL_USERS, payload: data })
+  } catch(err){
+       console.log(err.message)
+  }
+}
+export const unFollowUser = (unFollowUserId) => async(dispatch) =>  {
+  try {
+    const data  = await request({
+     method:  "POST",
+     endpoint: `/api/user/unfollow`,
+     body: {
+      following: unFollowUserId
+     }
+ });
+    dispatch({ type: ALL_USERS, payload: data })
+  } catch(err){
+       console.log(err.message)
+  }
+}

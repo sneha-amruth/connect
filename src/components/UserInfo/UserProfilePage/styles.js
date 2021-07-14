@@ -1,16 +1,24 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { pink } from '@material-ui/core/colors';
 
-export default makeStyles((theme) => ({
+export default makeStyles((theme) =>
+createStyles({
   avatar: {
     backgroundColor: pink[500],
-    width: theme.spacing(5),
-    height: theme.spacing(5),
+    width: theme.spacing(10),
+    height: theme.spacing(10),
   },
-  otherAvatar: {
-    backgroundColor: "#3f51b5",
-    width: theme.spacing(5),
-    height: theme.spacing(5),
+  content: {
+    marginLeft: "6rem",
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundBlendMode: 'darken',
+  },
+  border: {
+    border: 'solid',
   },
   fullHeightCard: {
     height: '100%',
@@ -19,20 +27,17 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    borderRadius: '10px',
     height: '100%',
     position: 'relative',
-    padding: "0.6rem",
-    margin: "1rem",
-    borderRadius: "0"
   },
   userInfo: {
     display: 'flex',
     flexDirection: 'row',
   },
   usernName: {
-    color: "black",
+    margin: "0.2rem 0.3rem",
     fontWeight: "bold",
-    textDecoration: "none"
   },
   grid: {
     display: 'flex',
@@ -46,8 +51,8 @@ export default makeStyles((theme) => ({
     padding: '0 16px',
   },
   cardActions: {
-    position: "absolute",
-    right: 0,
-    color: "blue"
+    // padding: '0 2px 0 0',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
-}));
+}))

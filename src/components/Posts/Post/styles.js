@@ -13,11 +13,14 @@ export default makeStyles({
   fullHeightCard: {
     height: '100%',
   },
+  avatar: {
+    backgroundColor: "#3f51b5",
+  },
   card: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    borderRadius: '15px',
+    borderRadius: '3px',
     height: '100%',
     position: 'relative',
   },

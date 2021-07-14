@@ -16,13 +16,14 @@ export const getPosts = () => async(dispatch) =>  {
 }
 
 export const createPost = (post) => async(dispatch) =>  {
+ 
   try {
     const { data } = await request({
      method:  "POST",
      endpoint: `/api/posts/`,
      body: {
        caption: post.message 
-     }
+     },
  });
     dispatch({ type: CREATE, payload: data })
   } catch(err){

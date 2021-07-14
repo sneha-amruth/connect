@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import useStyles from "./styles";
-// import { useSelector } from "react-redux";
 import { LOGOUT } from "../../constants/actionTypes";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
@@ -14,14 +13,12 @@ import { useEffect, useState } from "react";
 export const Navbar = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const classes = useStyles();
-    // const authData = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const logout = () => {
       dispatch({ type: LOGOUT });
       navigate('/auth');
-  
       setUser(null);
     };
 
