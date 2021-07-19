@@ -17,7 +17,6 @@ export const Home = () => {
   const currentUserDetails = Object.values(users).filter(user => user._id === currentUserId)[0];
   const otherUsers = Object.values(users).filter(user => user._id !== currentUserId);
 
-
   useEffect(() => {
     dispatch(getAllUsers());
     dispatch(getPosts());

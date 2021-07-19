@@ -49,5 +49,11 @@ export default makeStyles((theme) => ({
     position: "absolute",
     right: 0,
     color: "blue"
+  }, 
+  followText: {
+    color: "#3f51b5",
   },
+  unfollowText: {
+    color: pink[500],
+  }
 }));

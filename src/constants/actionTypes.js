@@ -9,3 +9,5 @@ export const LOGOUT = 'LOGOUT';
 
 export const ALL_USERS = 'ALL_USERS';
 // export const GET_USER = 'GET_USER';
+
+export const MY_NOTIFS = 'MY_NOTIFS';
