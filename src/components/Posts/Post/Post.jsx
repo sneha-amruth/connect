@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { Card, CardHeader, CardActions, CardContent, Avatar, Button, Typography } from "@material-ui/core";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -15,8 +15,14 @@ export const Post = ({post, authData}) => {
     const dispatch = useDispatch();;
     const userIdPost = post.userId._id;
     const isPostLiked = post.likes.likedUsers.find(user => user._id === authData);
-    const canDelete = userIdPost === authData;
+    const [canDelete, setCanDelete] = useState(false);
+    const loggedInUserId = JSON.parse(localStorage.getItem('profile'))?.userId;
 
+    useEffect(() => {
+     setCanDelete(userIdPost === loggedInUserId);
+    }, [authData]);
+
+   
     return (
         <Card className={classes.card}>
         <CardHeader
