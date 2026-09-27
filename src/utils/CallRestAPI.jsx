@@ -38,7 +38,10 @@ export const restAPICalls = () => {
             return null;
         }
       } catch (error) {
-        console.error(error);
+        if (error.response?.data) {
+          return error.response.data;
+        }
+        throw error;
       }
     };
     return { request };

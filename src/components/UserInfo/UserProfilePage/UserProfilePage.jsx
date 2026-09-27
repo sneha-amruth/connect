@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useStyles from './styles';
 import { Card, CardHeader, CardContent, Avatar, Typography, Grid, CircularProgress, Button, Modal } from "@material-ui/core";
 import { Navbar } from "../../Navbar/Navbar";
 import { Post } from "../../Posts/Post/Post";
+import { getAllUsers } from "../../../actions/users";
+import { getPosts } from "../../../actions/posts";
 
 export const UserProfilePage = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const { profileId } = useParams();
     const users = useSelector((state) => state.users);
     const posts = useSelector((state) => state.posts);
 
     const [profile, setProfile] = useState(users?.filter(user => user._id === profileId)[0]);
     const [currentUserPosts, setCurrentUserPosts] = useState(posts.filter(post => post.userId._id === profileId));
-    
+
+    useEffect(() => {
+      dispatch(getAllUsers());
+      dispatch(getPosts());
+    }, [dispatch]);
+
     function getModalStyle() {
       const top = 50;
       const left = 50;
@@ -27,23 +35,32 @@ export const UserProfilePage = () => {
     }
 
     const [modalStyle] = React.useState(getModalStyle);
-    const [open, setOpen] = React.useState(false);
-  
-    const handleOpen = () => {
-      setOpen(true);
+    const [followersOpen, setFollowersOpen] = React.useState(false);
+    const [followingOpen, setFollowingOpen] = React.useState(false);
+
+    const handleFollowersOpen = () => {
+      setFollowersOpen(true);
     };
-  
-    const handleClose = () => {
-      setOpen(false);
+
+    const handleFollowersClose = () => {
+      setFollowersOpen(false);
+    };
+
+    const handleFollowingOpen = () => {
+      setFollowingOpen(true);
+    };
+
+    const handleFollowingClose = () => {
+      setFollowingOpen(false);
     };
 
   useEffect(() => {
     setProfile(users?.filter(user => user._id === profileId)[0]);
-  }, []);
+  }, [users, profileId]);
 
   useEffect(() => {
     setCurrentUserPosts(posts.filter(post => post.userId._id === profileId));
-  }, [profile]);
+  }, [posts, profileId]);
 
   const followersBody = (
     <div style={modalStyle} className={classes.paper}>
@@ -66,7 +83,7 @@ export const UserProfilePage = () => {
     return (
         <>
         <Navbar />
-        {profile.length ? <CircularProgress/>:
+        {!profile ? <CircularProgress/>:
         <Grid container justifyContent="space-around" style={{margin: "1rem 0"}}>
         <Grid item xs={12} sm={4}>
         <Card className={classes.card} >
@@ -77,19 +94,19 @@ export const UserProfilePage = () => {
           </Avatar>
         }
         title={<Typography variant="h6">{profile.username}</Typography>}
-        subheader={<><Button onClick={handleOpen}><Typography variant="body2">{profile.followers.length}&nbsp;followers</Typography> </Button>
+        subheader={<><Button onClick={handleFollowersOpen}><Typography variant="body2">{profile.followers.length}&nbsp;followers</Typography> </Button>
          <Modal
-          open={open}
-          onClose={handleClose}
+          open={followersOpen}
+          onClose={handleFollowersClose}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description">
           {followersBody}
         </Modal>
-       
-        <Button onClick={handleOpen}><Typography variant="body2">&nbsp;&nbsp;{profile.following.length}&nbsp;following</Typography></Button>
+
+        <Button onClick={handleFollowingOpen}><Typography variant="body2">&nbsp;&nbsp;{profile.following.length}&nbsp;following</Typography></Button>
         <Modal
-        open={open}
-        onClose={handleClose}
+        open={followingOpen}
+        onClose={handleFollowingClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >

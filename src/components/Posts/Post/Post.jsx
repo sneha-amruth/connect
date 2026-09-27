@@ -20,7 +20,7 @@ export const Post = ({post, authData}) => {
 
     useEffect(() => {
      setCanDelete(userIdPost === loggedInUserId);
-    }, [authData]);
+    }, [authData, userIdPost, loggedInUserId]);
 
    
     return (

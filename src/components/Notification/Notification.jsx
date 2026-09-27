@@ -1,6 +1,5 @@
 import React from 'react';
 // import { useSelector } from "react-redux";
-import { Typography } from '@material-ui/core';
 
 
 export const Notification = ({notifs}) => {
