@@ -1,11 +1,12 @@
-import { Route, Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
-export default function PrivateRoute({path, ...props}) {
+export default function PrivateRoute({ children }) {
+    const location = useLocation();
     const isUserLoggedIn = JSON.parse(localStorage.getItem('profile'))?.userId;
 
     return isUserLoggedIn ? (
-        <Route {...props} path={path} />
+        children
       ) : (
-        <Navigate state={{ from: path }} replace to="/auth" />
+        <Navigate state={{ from: location.pathname }} replace to="/auth" />
       );
   }

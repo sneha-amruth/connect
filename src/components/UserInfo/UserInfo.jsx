@@ -12,7 +12,7 @@ export const UserInfo = ({ userId, currentUser, firstName, lastName, username, b
     const currentUserId = JSON.parse(localStorage.getItem('profile'))?.userId;
     const users = useSelector((state) => state.users);
     const currentUserDetails = Object.values(users).filter(user => user._id === currentUserId)[0];
-    const followingUser =  currentUserDetails.following.some(user => user.userId === userId);
+    const followingUser =  currentUserDetails?.following.some(user => user.userId === userId) ?? false;
     const [isFollowing, setFollowing] = useState(followingUser);
 
     const handleFollow = () => {

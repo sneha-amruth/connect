@@ -8,8 +8,8 @@ import { UserProfilePage } from './components/UserInfo/UserProfilePage/UserProfi
 const App = () => {
   return (
     <Routes>
-      <PrivateRoute path="/" element={<Home/>}></PrivateRoute>
-      <PrivateRoute path="/:profileId" element={<UserProfilePage/>}></PrivateRoute>
+      <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>} />
+      <Route path="/:profileId" element={<PrivateRoute><UserProfilePage/></PrivateRoute>} />
       <Route path="/auth" element={<Auth/>} />
     </Routes>
   );
